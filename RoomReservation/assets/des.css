@@ -1,0 +1,621 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('bg.jpg');
+  background-repeat: none;
+background-size: 100% 100%;
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+audio{
+	display: none;
+}
+
+.login-container {
+  position: relative;
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.login-container::before, .add-room-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, silver, transparent, silver, transparent);
+  background-size: 300% 300%;
+  animation: move-border 2s linear infinite;
+  z-index: -1; /* Sends it behind the content */
+}
+
+@keyframes move-border {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+}
+
+/* Login Button */
+.login-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: gray;
+}
+
+.signup {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.signup hr {
+  border: 0;
+  border-top: 1px solid #444;
+  margin: 10px 0;
+}
+
+.signup p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.signup-link {
+  color: #999;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-link:hover {
+  color: white;
+}
+
+/*admin*/
+
+.progress-bar-container {
+  width: 100%;
+  background-color: black;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 15px 0;
+  margin-top: 35px;
+  border: 1px solid silver;
+}
+
+.progress-bar {
+  height: 20px;
+  line-height: 20px;
+  color: black;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.active-progress { background: rgb(25,195,53);
+background: linear-gradient(90deg, rgba(25,195,53,1) 0%, rgba(31,255,0,1) 50%, rgba(25,195,53,1) 100%); }
+.inactive-progress { background: rgb(255,111,0);
+background: linear-gradient(90deg, rgba(255,111,0,1) 0%, rgba(255,141,0,1) 50%, rgba(255,111,0,1) 100%); }
+.maintenance-progress { background: rgb(255,0,0);
+background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,42,0,1) 50%, rgba(255,0,0,1) 100%); }
+
+.status-label {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.admin-main {
+  max-height: 100%;
+  max-width: 100%;
+  width: 1200px;
+  height: 560px;
+  padding: 20px;
+  padding-top: 30px;
+  display: flex;
+}
+
+.admin-box {
+  width: 25%;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  border: 2px solid silver;
+  height: 70%;
+}
+
+.admin-room-box {
+  width: 50%;
+  padding: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 80%;
+  margin-left: 120px;
+}
+
+.admin-room-container {
+  width: 95%;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  border: 2px solid silver;
+  height: 85%;
+  overflow-y: scroll;
+}
+
+.admin-room-container h2{
+  margin-left: 25px;
+}
+
+/* Styling the scrollbar */
+.admin-room-container::-webkit-scrollbar, .manage-rooms-container::-webkit-scrollbar, .details_room::-webkit-scrollbar, .review-container::-webkit-scrollbar, .room-img-container::-webkit-scrollbar{
+  width: 10px; /* Width of the scrollbar */
+}
+
+.admin-room-container::-webkit-scrollbar-thumb, .manage-rooms-container::-webkit-scrollbar-thumb, .details_room::-webkit-scrollbar-thumb, .review-container::-webkit-scrollbar-thumb , .room-img-container::-webkit-scrollbar-thumb{
+  background: silver; /* Thumb color */
+  border-radius: 10px; /* Rounded edges for the thumb */
+  border: 2px solid rgba(0, 0, 0, 0.85); /* Thumb border matches background */
+}
+
+.admin-room-container::-webkit-scrollbar-thumb:hover, .manage-rooms-container::-webkit-scrollbar-thumb:hover, .details_room::-webkit-scrollbar-thumb:hover, .review-container::-webkit-scrollbar-thumb:hover , .room-img-container::-webkit-scrollbar-thumb:hover{
+  background: white; /* Change thumb color on hover */
+}
+
+
+
+.admin-icon {
+  margin: 5px;
+  width: 75px;
+  height: 75px;
+  float: left;
+}
+
+.admin-box h1 {
+  float: right;
+}
+
+.admin-buttons {
+    width: 50px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid silver;
+}
+
+/*Add room*/
+
+.add-room-container {
+    position: relative;
+    width: 40%;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    text-align: left;
+    border: 2px solid silver;
+}
+
+.add-room-container p {
+  font-size: 12px;
+}
+
+.add-room-container h2, .details_room h2 {
+    text-align: center;
+}
+
+.form-group-add-room {
+    display: flex; /* Arrange items in a row */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px;
+}
+
+.form-group-add-room label {
+    width: 20%; /* Allocate width for the label */
+    margin-right: 10px; /* Space between label and input */
+    font-size: 12px;
+    color: #ccc;
+    text-align: left; /* Align label text to the right */
+}
+
+.form-group-add-room input[type="text"], 
+.form-group-add-room input[type="file"], 
+.form-group-add-room input[type="date"], 
+.form-group-add-room input[type="email"], 
+.form-group-add-room select {
+    flex: 1; /* Allow input to take the remaining space */
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    width: auto;
+}
+
+
+.checkbox-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping of checkboxes */
+}
+
+.checkbox-grid label {
+    width: calc(25% - 10px); /* Adjust width based on desired layout */
+    margin-right: 10px; /* Space between checkboxes */
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-button:hover, .admin-buttons:hover {
+    background-color: gray; /* Change on hover */
+}
+
+.icon-button {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+}
+
+/*manage rooms*/
+
+.manage-rooms-container {
+    position: relative;
+    max-width: 80%;
+    width: 1120px;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-align: left;
+    border: 2px solid silver;
+}
+
+
+.manage-rooms-container td, .admin-room-container td{
+  font-size: 12px;
+}
+
+.manage-rooms-container table{
+  width: 100%;
+}
+
+.manage-rooms-container th, .admin-room-container th{
+  border-bottom: 2px solid silver;
+  border-top: 2px solid silver;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 10px;
+  text-align: left;
+}
+
+.admin-room-container td{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.admin-room-container table{
+  width: 100%;
+}
+.room-table {
+  width: 100%; /* Make table span the full width of the container */
+  border-collapse: collapse; /* Ensure rows align without gaps */
+  text-align: left;
+  margin-top: 20px;
+  color: white;
+}
+
+.form-group-manage-room {
+    display: flex; /* Arrange items in a row */
+    align-items: center; /* Align items vertically */
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.form-group-manage-room input[type="text"], 
+.form-group-manage-room input[type="file"], 
+.form-group-manage-room select {
+    flex: 1; /* Allow input to take the remaining space */
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-size: 12px;
+    width: auto;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+}
+
+.action a {
+  padding: 2px;
+  text-decoration: none;
+  color: silver;
+  text-align: center;
+}
+
+.action a:hover, .action input:hover {
+  padding: 2px;
+  text-decoration: underline;
+  color: white;
+  font-size: 13px;
+}
+
+.action input {
+  padding: 2px;
+  text-decoration: none;
+  color: silver;
+  background: none;
+  border: none;
+  margin-left: 2px;
+}
+
+.user-side-nav {
+  height: 100vh; /* Full viewport height */
+  background-color: black;
+  width: 165px;
+  position: fixed; /* Fix it to the left side */
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  border-right: 2px solid silver;
+  padding: 10px;
+}
+
+.user-side-nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 0;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.user-side-nav a:hover{
+  background-color: #333;
+}
+
+/*dashboard*/
+
+.dashboard{
+  width: 950px;
+  max-width: 80%;
+  margin: 20px;
+  padding: 10px;
+  margin-left: 150px;
+  height: 500px;
+
+}
+
+.dashboard h1{
+  float: left;
+  margin: 20px;
+  margin-right: 170px;
+}
+
+.dashboard input{
+  margin: 30px;
+}
+
+.submit-button-dsh {
+    width: 120px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 23px;
+}
+
+.submit-button-dsh:hover {
+    background-color: #333;
+}
+
+
+.name_n_button {
+  width: 100%;
+  display: flex; /* Use Flexbox */
+  justify-content: space-between; /* Separate the name and button */
+  align-items: center; /* Align elements vertically */
+  padding: 10px; /* Add spacing around content */
+}
+
+.room-img-container {
+  max-width: 100%;
+  display: flex; /* Use Flexbox for layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+  gap: 10px; /* Add spacing between room-containers */
+  padding: 20px;
+  text-align: center;
+  overflow-y: scroll;
+  max-height: 66%;
+}
+
+.room-containers {
+  flex: 0 1 calc(33.33% - 40px); /* 3 items per row, accounting for gap */
+  height: auto; /* Let the container adapt to content height */
+  border: 1px solid black;
+  border-radius: 15px 15px 25px 25px;
+  overflow: hidden;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Separate image and text/button area */
+  margin: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition */
+}
+
+@media screen and (max-width: 768px) {
+  .room-containers {
+    flex: 0 1 calc(50% - 20px); /* 2 items per row for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .room-containers {
+    flex: 0 1 calc(100% - 20px); /* 1 item per row for very small screens */
+  }
+}
+
+
+.room-containers:hover {
+  border: 1px solid silver;
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 0 15px 5px rgba(192, 192, 192, 0.8); /* Silver glow effect */
+}
+
+
+.name {
+  font-size: 14px; /* Adjust font size for better visibility */
+  margin-left: 10px; /* Smaller left margin */
+}
+
+/*dtls room*/
+.details_room {
+    position: relative;
+    width: 40%;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    text-align: left;
+    border: 2px solid silver;
+    height: 80%;
+    overflow: scroll;
+}
+
+.details_room p {
+  font-size: 12px;
+}
+
+
+
+.feature-item label {
+    cursor: not-allowed; /* Change cursor to indicate non-interactive */
+}
+
+input[type="checkbox"]:disabled {
+    opacity: 0.6; /* Make disabled checkboxes slightly transparent */
+}
+.review-container {
+  position: relative;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  overflow-y: scroll;
+  border: 2px solid silver;
+  height: 60vh;
+  }
+
+.review-item strong{
+   color: black; /* Text color */
+    text-shadow: 
+        -1px -1px 0 white, /* Top-left */
+        1px -1px 0 white,  /* Top-right */
+        -1px 1px 0 white,  /* Bottom-left */
+        1px 1px 0 white;   /* Bottom-right */
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-button:hover {
+    background-color: #ff3333;
+}
+
